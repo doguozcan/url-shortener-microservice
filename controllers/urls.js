@@ -21,7 +21,7 @@ const createURL = async (req, res) => {
               short_url: existingUrl.short_url,
             });
           } else {
-            const maxShortUrl = await Url.findOne({}, { short_url: -1 });
+            const maxShortUrl = await Url.findOne().sort({ short_url: -1 });
             const nextShortUrl = maxShortUrl ? maxShortUrl.short_url + 1 : 1;
 
             const createdURL = await Url.create({
